@@ -1,8 +1,11 @@
-import { ReactElement } from "react";
-import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
+import { ReactElement, ReactNode } from "react";
 
-const Hero = ({ children }): ReactElement => {
-  return children;
+type HeroComponentsProps = {
+  children: ReactNode;
+};
+
+const Hero = ({ children }: HeroComponentsProps): ReactElement => {
+  return <div className="w-[100%] md:px-8 px-4">{children}</div>;
 };
 
 export default Hero;
