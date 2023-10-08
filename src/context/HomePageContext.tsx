@@ -39,7 +39,7 @@ const reducer = (
         throw new Error("Error in input form");
       }
       const { searchFilter } = action.payload;
-      return { ...state, searchFilter };
+      return { ...state, searchFilter: searchFilter };
     }
     default:
       throw new Error("Unidentified reducer action type");

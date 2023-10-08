@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { Hero } from "../components";
 import useHomePage from "../hooks/useHomePage";
 import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
@@ -8,13 +9,12 @@ const HomePage = () => {
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e);
   };
 
-  const onChangeInput = (e: HTMLInputElement) => {
-    const { value } = e.targe.value;
-    dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.SEARCH_BY_USER, payload: value });
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
     console.log(value);
+    dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.SEARCH_BY_USER, payload: value });
   };
 
   return (
