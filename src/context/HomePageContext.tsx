@@ -3,17 +3,23 @@ import { ReactElement, createContext, useReducer, useMemo } from "react";
 export type HomePageStateType = {
   isNavbarOpen: boolean;
   searchFilter: string;
+  isLoading: boolean;
+  isError: boolean;
 };
 
 const initialHomePageState: HomePageStateType = {
   isNavbarOpen: false,
   searchFilter: "tomato",
+  isLoading: false,
+  isError: false,
 };
 
 const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
   OPEN_SIDEBAR: "OPEN_SIDEBAR",
   CLOSE_SIDEBAR: "CLOSE_SIDEBAR",
   SEARCH_BY_USER: "SEARCH_BY_USER",
+  IS_LOADING_SEARCHED_MEALS: "IS_LOADING_SEARCHED_MEALS",
+  IS_ERROR_SEARCHED_MEALS: "IS_ERROR_SEARCHED_MEALS",
 };
 
 export type HomePageReducerActionType = typeof HOMEPAGE_REDUCER_ACTIONS_TYPE;
@@ -39,7 +45,7 @@ const reducer = (
         throw new Error("Error in input form");
       }
       const { searchFilter } = action.payload;
-      return { ...state, searchFilter: searchFilter };
+      return { ...state, searchFilter };
     }
     default:
       throw new Error("Unidentified reducer action type");
@@ -67,7 +73,7 @@ const initialHomePageContextState: UseHomePageContextType = {
   HOMEPAGE_REDUCER_ACTIONS: HOMEPAGE_REDUCER_ACTIONS_TYPE,
   state: {
     isNavbarOpen: false,
-    searchFilter: "tomato",
+    searchFilter: "",
   },
 };
 

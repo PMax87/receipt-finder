@@ -3,18 +3,35 @@ import { Hero } from "../components";
 import useHomePage from "../hooks/useHomePage";
 import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
 import { AiOutlineSearch } from "react-icons/ai";
+import axios from "axios";
 
 const HomePage = () => {
   const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
 
+  const fetchData = async () => {
+    dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.IS_LOADING_SEARCHED_MEALS });
+
+    try {
+      const response = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${state.searchFilter}`
+      );
+      const data = response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
+    fetchData();
   };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    console.log(value);
-    dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.SEARCH_BY_USER, payload: value });
+    const value = e.target.value;
+    dispatch({
+      type: HOMEPAGE_REDUCER_ACTIONS.SEARCH_BY_USER,
+      payload: { ...state, searchFilter: value },
+    });
   };
 
   return (
@@ -48,26 +65,22 @@ const HomePage = () => {
           </div>
         </div>
       </Hero>
-      <div className="w-[100%] mt-8 md:px-8 px-4">
-        <div className="container mx-auto max-w-screen-xl">
-          <div className="flex items-center">
-            <form onSubmit={onSubmitForm} className="flex items-center">
-              <label className="text-2xl font-semibold me-7">
-                Cerca il tuo drink
-              </label>
-              <input
-                type="text"
-                placeholder={state.searchFilter}
-                value={state.searchFilter}
-                onChange={onChangeInput}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              />
-              <button type="submit">
-                <AiOutlineSearch className="fill-fuchsia-500 text-2xl" />
-              </button>
-            </form>
-          </div>
-        </div>
+      <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
+        <form onSubmit={onSubmitForm} className="flex">
+          <label className="text-2xl font-semibold me-4">
+            Cerca la tua ricetta:
+          </label>
+          <input
+            type="text"
+            name="userSearch"
+            value={state.searchFilter}
+            onChange={onChangeInput}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 w-60 me-4"
+          />
+          <button type="submit">
+            <AiOutlineSearch className="fill-fuchsia-500 text-2xl" />
+          </button>
+        </form>
       </div>
     </>
   );
