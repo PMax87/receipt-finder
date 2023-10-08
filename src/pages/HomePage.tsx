@@ -1,25 +1,41 @@
-import { ChangeEvent } from "react";
-import { Hero } from "../components";
+import { ChangeEvent, useEffect } from "react";
+import { Hero, HomePageSearchedMeals } from "../components";
 import useHomePage from "../hooks/useHomePage";
 import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
 import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
+import { MealsSearcheType } from "../context/HomePageContext";
 
 const HomePage = () => {
   const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
 
   const fetchData = async () => {
     dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.IS_LOADING_SEARCHED_MEALS });
-
     try {
-      const response = await axios.get(
+      const response = await axios.get<MealsSearcheType[]>(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${state.searchFilter}`
       );
       const data = response.data;
+      console.log(data);
+      dispatch({
+        type: HOMEPAGE_REDUCER_ACTIONS.MEALS_FETCHING_SUCCCESS,
+        payload: {
+          isLoading: false,
+          isError: false,
+          isNavbarOpen: false,
+          meals: data,
+          searchFilter: "",
+        },
+      });
     } catch (error) {
+      dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.IS_ERROR_SEARCHED_MEALS });
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,6 +98,7 @@ const HomePage = () => {
           </button>
         </form>
       </div>
+      <HomePageSearchedMeals />
     </>
   );
 };

@@ -1,10 +1,17 @@
 import { ReactElement, createContext, useReducer, useMemo } from "react";
 
+export type MealsSearcheType = {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+};
+
 export type HomePageStateType = {
   isNavbarOpen: boolean;
   searchFilter: string;
   isLoading: boolean;
   isError: boolean;
+  meals: MealsSearcheType[];
 };
 
 const initialHomePageState: HomePageStateType = {
@@ -12,6 +19,7 @@ const initialHomePageState: HomePageStateType = {
   searchFilter: "tomato",
   isLoading: false,
   isError: false,
+  meals: [],
 };
 
 const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
@@ -19,6 +27,7 @@ const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
   CLOSE_SIDEBAR: "CLOSE_SIDEBAR",
   SEARCH_BY_USER: "SEARCH_BY_USER",
   IS_LOADING_SEARCHED_MEALS: "IS_LOADING_SEARCHED_MEALS",
+  MEALS_FETCHING_SUCCCESS: "MEALS_FETCHING_SUCCCESS",
   IS_ERROR_SEARCHED_MEALS: "IS_ERROR_SEARCHED_MEALS",
 };
 
@@ -47,6 +56,19 @@ const reducer = (
       const { searchFilter } = action.payload;
       return { ...state, searchFilter };
     }
+    case HOMEPAGE_REDUCER_ACTIONS_TYPE.IS_LOADING_SEARCHED_MEALS: {
+      return { ...state, isLoading: true };
+    }
+    case HOMEPAGE_REDUCER_ACTIONS_TYPE.MEALS_FETCHING_SUCCCESS: {
+      if (!action.payload) {
+        throw new Error("Error in input form");
+      }
+      const { meals } = action.payload;
+      return { ...state, isLoading: false, meals: meals };
+    }
+    case HOMEPAGE_REDUCER_ACTIONS_TYPE.IS_ERROR_SEARCHED_MEALS: {
+      return { ...state, isLoading: false, isError: true };
+    }
     default:
       throw new Error("Unidentified reducer action type");
   }
@@ -74,6 +96,9 @@ const initialHomePageContextState: UseHomePageContextType = {
   state: {
     isNavbarOpen: false,
     searchFilter: "",
+    isLoading: false,
+    isError: false,
+    meals: [],
   },
 };
 
