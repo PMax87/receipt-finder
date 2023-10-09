@@ -25,7 +25,7 @@ export type HomePageStateType = {
 
 const initialHomePageState: HomePageStateType = {
   isNavbarOpen: false,
-  isLoading: false,
+  isLoading: true,
   isError: false,
   receivedMeals: [],
   searchedFilter: "tomato",

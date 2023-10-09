@@ -4,10 +4,6 @@ import useHomePage from "../hooks/useHomePage";
 const SearchedMeals = () => {
   const { state } = useHomePage();
 
-  if (state.isLoading) {
-    return <div>Caricamento...</div>;
-  }
-
   if (state.receivedMeals.length < 1) {
     return (
       <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">

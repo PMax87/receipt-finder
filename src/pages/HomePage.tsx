@@ -5,6 +5,7 @@ import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
 import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
 import { GetMealsApiResponse } from "../context/HomePageContext";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
@@ -32,7 +33,11 @@ const HomePage = () => {
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    fetchData();
+    if (state.searchedFilter.trim() !== "") {
+      fetchData();
+    } else {
+      toast.error("Pregasi fornire un valore");
+    }
   };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +100,7 @@ const HomePage = () => {
         </form>
       </div>
       <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 py-10 lg:mt-4">
-        <SearchedMeals />
+        {state.isLoading ? <div>Loading...</div> : <SearchedMeals />}
       </div>
     </>
   );
