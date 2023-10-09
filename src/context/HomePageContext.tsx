@@ -1,6 +1,15 @@
 import { ReactElement, createContext, useReducer, useMemo } from "react";
 
-export type MealsSearcheType = {
+export type ApiResponse = {
+  meals?: Meal[];
+  searchedFilter?: string;
+};
+
+export type GetMealsApiResponse = {
+  meals: Meal[];
+};
+
+export type Meal = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
@@ -8,18 +17,18 @@ export type MealsSearcheType = {
 
 export type HomePageStateType = {
   isNavbarOpen: boolean;
-  searchFilter: string;
   isLoading: boolean;
   isError: boolean;
-  meals: MealsSearcheType[];
+  receivedMeals: Meal[];
+  searchedFilter: string;
 };
 
 const initialHomePageState: HomePageStateType = {
   isNavbarOpen: false,
-  searchFilter: "tomato",
   isLoading: false,
   isError: false,
-  meals: [],
+  receivedMeals: [],
+  searchedFilter: "tomato",
 };
 
 const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
@@ -35,7 +44,7 @@ export type HomePageReducerActionType = typeof HOMEPAGE_REDUCER_ACTIONS_TYPE;
 
 export type HomePageReducerAction = {
   type: string;
-  payload?: HomePageStateType;
+  payload?: ApiResponse;
 };
 
 const reducer = (
@@ -53,18 +62,20 @@ const reducer = (
       if (!action.payload) {
         throw new Error("Error in input form");
       }
-      const { searchFilter } = action.payload;
-      return { ...state, searchFilter };
+      const { searchedFilter } = action.payload;
+      const filter = searchedFilter == null ? "" : searchedFilter;
+      return { ...state, searchedFilter: filter };
     }
     case HOMEPAGE_REDUCER_ACTIONS_TYPE.IS_LOADING_SEARCHED_MEALS: {
       return { ...state, isLoading: true };
     }
     case HOMEPAGE_REDUCER_ACTIONS_TYPE.MEALS_FETCHING_SUCCCESS: {
       if (!action.payload) {
-        throw new Error("Error in input form");
+        throw new Error("Error in action");
       }
       const { meals } = action.payload;
-      return { ...state, isLoading: false, meals: meals };
+      const newMeals = meals == undefined ? [] : meals;
+      return { ...state, isLoading: false, receivedMeals: newMeals };
     }
     case HOMEPAGE_REDUCER_ACTIONS_TYPE.IS_ERROR_SEARCHED_MEALS: {
       return { ...state, isLoading: false, isError: true };
@@ -95,10 +106,10 @@ const initialHomePageContextState: UseHomePageContextType = {
   HOMEPAGE_REDUCER_ACTIONS: HOMEPAGE_REDUCER_ACTIONS_TYPE,
   state: {
     isNavbarOpen: false,
-    searchFilter: "",
+    searchedFilter: "",
     isLoading: false,
     isError: false,
-    meals: [],
+    receivedMeals: [],
   },
 };
 

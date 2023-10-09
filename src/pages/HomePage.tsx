@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect } from "react";
-import { Hero, HomePageSearchedMeals } from "../components";
+import { Hero } from "../components";
 import useHomePage from "../hooks/useHomePage";
 import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
 import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
-import { MealsSearcheType } from "../context/HomePageContext";
+import { GetMealsApiResponse } from "../context/HomePageContext";
 
 const HomePage = () => {
   const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
@@ -12,20 +12,13 @@ const HomePage = () => {
   const fetchData = async () => {
     dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.IS_LOADING_SEARCHED_MEALS });
     try {
-      const response = await axios.get<MealsSearcheType[]>(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${state.searchFilter}`
+      const response = await axios.get<GetMealsApiResponse>(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${state.searchedFilter}`
       );
-      const data = response.data;
-      console.log(data);
+      const data = response.data?.meals;
       dispatch({
         type: HOMEPAGE_REDUCER_ACTIONS.MEALS_FETCHING_SUCCCESS,
-        payload: {
-          isLoading: false,
-          isError: false,
-          isNavbarOpen: false,
-          meals: data,
-          searchFilter: "",
-        },
+        payload: { meals: data },
       });
     } catch (error) {
       dispatch({ type: HOMEPAGE_REDUCER_ACTIONS.IS_ERROR_SEARCHED_MEALS });
@@ -46,7 +39,7 @@ const HomePage = () => {
     const value = e.target.value;
     dispatch({
       type: HOMEPAGE_REDUCER_ACTIONS.SEARCH_BY_USER,
-      payload: { ...state, searchFilter: value },
+      payload: { searchedFilter: value },
     });
   };
 
@@ -82,23 +75,37 @@ const HomePage = () => {
         </div>
       </Hero>
       <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
-        <form onSubmit={onSubmitForm} className="flex">
+        <form onSubmit={onSubmitForm} className="flex items-center">
           <label className="text-2xl font-semibold me-4">
             Cerca la tua ricetta:
           </label>
           <input
             type="text"
             name="userSearch"
-            value={state.searchFilter}
+            value={state.searchedFilter}
             onChange={onChangeInput}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 w-60 me-4"
           />
           <button type="submit">
             <AiOutlineSearch className="fill-fuchsia-500 text-2xl" />
           </button>
+          <p className="justify-self-end">
+            {state.receivedMeals.length + " Risultati trovati"}
+          </p>
         </form>
       </div>
-      <HomePageSearchedMeals />
+      {state.receivedMeals.length < 1 ? (
+        <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-1/2"
+            role="alert"
+          >
+            <span className="block sm:inline">Nessun ricetta trovata</span>
+          </div>
+        </div>
+      ) : (
+        <div>Ciao</div>
+      )}
     </>
   );
 };
