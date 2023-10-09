@@ -99,7 +99,7 @@ const HomePage = () => {
           </p>
         </form>
       </div>
-      <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 py-10 lg:mt-4">
+      <div className="w-[100%] md:px-8 px-4">
         {state.isLoading ? <div>Loading...</div> : <SearchedMeals />}
       </div>
     </>

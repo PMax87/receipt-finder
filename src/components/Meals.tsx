@@ -19,11 +19,11 @@ const Meals = ({ meal }: PropsType): ReactElement => {
         alt={meal.strMealThumb}
         className="rounded"
       />
-      <div className="absolute bottom-0 w-full h-12 bg-zinc-700 bg-opacity-80">
-        <div className="px-3 flex h-full items-center justify-between">
-          <p className="text-zinc-100">{meal.strMeal}</p>
+      <div className="absolute bottom-0 w-full p-5 bg-zinc-700 bg-opacity-80">
+        <div className="flex h-full items-center justify-between">
+          <p className="text-zinc-100 w-2/3">{meal.strMeal}</p>
           <div
-            className="bg-fuchsia-500 hover:bg-fuchsia-700-700 text-white py-1 px-2 rounded-full"
+            className="bg-fuchsia-500 hover:bg-fuchsia-700 text-white py-2 px-3 rounded cursor-pointer w-1/3 text-center transition-all"
             onClick={goToMeal}
           >
             View More
