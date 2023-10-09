@@ -8,8 +8,8 @@ type PropsType = {
 
 const Meals = ({ meal }: PropsType): ReactElement => {
   const navigate = useNavigate();
-  const goToMeal = () => {
-    navigate(`/meal/${meal.idMeal}`);
+  const goToMeal = (idMeal: string) => {
+    navigate(`/meal/${idMeal}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const Meals = ({ meal }: PropsType): ReactElement => {
           <p className="text-zinc-100 w-2/3">{meal.strMeal}</p>
           <div
             className="bg-fuchsia-500 hover:bg-fuchsia-700 text-white py-2 px-3 rounded cursor-pointer w-1/3 text-center transition-all"
-            onClick={goToMeal}
+            onClick={() => goToMeal(meal.idMeal)}
           >
             View More
           </div>

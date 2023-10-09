@@ -40,8 +40,6 @@ const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
   IS_ERROR_SEARCHED_MEALS: "IS_ERROR_SEARCHED_MEALS",
 };
 
-export type HomePageReducerActionType = typeof HOMEPAGE_REDUCER_ACTIONS_TYPE;
-
 export type HomePageReducerAction = {
   type: string;
   payload?: ApiResponse;
