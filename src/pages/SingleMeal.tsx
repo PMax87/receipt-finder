@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect } from "react";
 import useSingleMeal from "../hooks/useSingleMeal";
 import { GetMealApiResponse } from "../context/SingleReceipContext";
-import { ApiResponse } from "../context/HomePageContext";
 
 const SingleMeal = () => {
   const { dispatch, state, SINGLE_MEAL_REDUCER_ACTIONS } = useSingleMeal();
