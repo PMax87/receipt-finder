@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect } from "react";
-import { Hero } from "../components";
+import { Hero, SearchedMeals } from "../components";
 import useHomePage from "../hooks/useHomePage";
 import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -94,18 +94,9 @@ const HomePage = () => {
           </p>
         </form>
       </div>
-      {state.receivedMeals.length < 1 ? (
-        <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
-          <div
-            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-1/2"
-            role="alert"
-          >
-            <span className="block sm:inline">Nessun ricetta trovata</span>
-          </div>
-        </div>
-      ) : (
-        <div>Ciao</div>
-      )}
+      <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 py-10 lg:mt-4">
+        <SearchedMeals />
+      </div>
     </>
   );
 };
