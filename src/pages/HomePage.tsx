@@ -2,10 +2,10 @@ import { ChangeEvent, useEffect } from "react";
 import { Hero, SearchedMeals } from "../components";
 import useHomePage from "../hooks/useHomePage";
 import HeroImage from "../images/koreanbeefmealprep-750x1000.webp";
-import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
 import { GetMealsApiResponse } from "../context/HomePageContext";
 import { toast } from "react-toastify";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const HomePage = () => {
   const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();

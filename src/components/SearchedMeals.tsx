@@ -33,7 +33,7 @@ const SearchedMeals = () => {
   }
 
   return (
-    <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 py-10 lg:mt-4 grid grid-cols-3">
+    <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 py-10 lg:mt-4 grid grid-cols-3 gap-10">
       {state.receivedMeals.map((meal) => {
         return <Meals key={meal.idMeal} meal={meal} />;
       })}
