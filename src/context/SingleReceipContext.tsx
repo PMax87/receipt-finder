@@ -5,7 +5,7 @@ export type ApiResponse = {
 };
 
 export type GetMealApiResponse = {
-  meals: Meal[][];
+  meals: Meal[];
 };
 
 export type Meal = {

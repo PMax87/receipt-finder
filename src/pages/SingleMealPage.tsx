@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import useSingleMeal from "../hooks/useSingleMeal";
 import { GetMealApiResponse } from "../context/SingleReceipContext";
 import { Loading } from "../components";
+import { SingleMeal } from "../components";
 
 const SingleMealPage = () => {
   const { dispatch, state, SINGLE_MEAL_REDUCER_ACTIONS } = useSingleMeal();
@@ -16,7 +17,7 @@ const SingleMealPage = () => {
     });
     try {
       const response = await axios.get<GetMealApiResponse>(url + idMeal);
-      const data = response.data.meals[0];
+      const data = response.data.meals;
       dispatch({
         type: SINGLE_MEAL_REDUCER_ACTIONS.MEAL_FETCHING_SUCCCESS,
         payload: { meals: data },
@@ -40,10 +41,11 @@ const SingleMealPage = () => {
     );
   }
 
-  if (!state.isLoading && state.receivedMeal) {
+  if (!state.isLoading && state.receivedMeal[0]) {
+    console.log(state.receivedMeal);
     return (
       <div className="w-[100%] md:px-8 px-4">
-        <img src={state.receivedMeal[0].strMealThumb} />
+        <SingleMeal meal={state.receivedMeal[0]} />
       </div>
     );
   }
