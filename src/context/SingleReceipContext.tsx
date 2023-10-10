@@ -1,11 +1,11 @@
 import { ReactElement, createContext, useReducer, useMemo } from "react";
 
 export type ApiResponse = {
-  meals?: Meal[];
+  meals: Meal[];
 };
 
 export type GetMealApiResponse = {
-  meals: Meal[];
+  meals: Meal[][];
 };
 
 export type Meal = {
@@ -53,12 +53,15 @@ const reducer = (
     }
     case SINGLE_MEAL_REDUCER_ACTIONS_TYPE.MEAL_FETCHING_SUCCCESS: {
       if (!action.payload) {
-        throw new Error("Error in Fetching meal action type");
+        throw new Error(
+          "Errore nella risposta API: il campo 'meals' è mancante o non è un array"
+        );
       }
-      const { meals } = action.payload;
-      const newMeal = meals === undefined ? [] : meals;
-      console.log(meals);
-      return { ...state, isLoading: false, receivedMeal: newMeal };
+      return {
+        ...state,
+        isLoading: false,
+        receivedMeal: action.payload?.meals || [],
+      };
     }
     case SINGLE_MEAL_REDUCER_ACTIONS_TYPE.IS_ERROR_SEARCHED_MEAL: {
       return { ...state, isLoading: false, isError: false };

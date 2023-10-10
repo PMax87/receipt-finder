@@ -91,11 +91,17 @@ const HomePage = () => {
             onChange={onChangeInput}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 w-60 me-4"
           />
-          <button type="submit">
+          <button type="submit" disabled={state.isLoading}>
             <AiOutlineSearch className="fill-fuchsia-500 text-2xl" />
           </button>
-          <p className="justify-self-end">
-            {state.receivedMeals.length + " Risultati trovati"}
+          <p
+            className={
+              state.receivedMeals.length < 1 ? "hidden" : "justify-self-end"
+            }
+          >
+            {state.receivedMeals.length > 1
+              ? `${state.receivedMeals.length} Risultati trovati`
+              : `${state.receivedMeals.length} Risultato trovato`}
           </p>
         </form>
       </div>
