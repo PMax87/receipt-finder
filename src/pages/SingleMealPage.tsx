@@ -17,11 +17,13 @@ const SingleMealPage = () => {
     });
     try {
       const response = await axios.get<GetMealApiResponse>(url + idMeal);
-      const data = response.data.meals;
-      dispatch({
-        type: SINGLE_MEAL_REDUCER_ACTIONS.MEAL_FETCHING_SUCCCESS,
-        payload: { meals: data },
-      });
+      if (response.data.meals.length > 0) {
+        const data = response.data.meals[0];
+        dispatch({
+          type: SINGLE_MEAL_REDUCER_ACTIONS.MEAL_FETCHING_SUCCCESS,
+          payload: { meals: data },
+        });
+      }
     } catch (error) {
       dispatch({
         type: SINGLE_MEAL_REDUCER_ACTIONS.IS_ERROR_SEARCHED_MEAL,
@@ -41,11 +43,11 @@ const SingleMealPage = () => {
     );
   }
 
-  if (!state.isLoading && state.receivedMeal[0]) {
+  if (!state.isLoading && state.receivedMeal !== null) {
     console.log(state.receivedMeal);
     return (
       <div className="w-[100%] md:px-8 px-4">
-        <SingleMeal meal={state.receivedMeal[0]} />
+        <SingleMeal meal={state.receivedMeal} />
       </div>
     );
   }

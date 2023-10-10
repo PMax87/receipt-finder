@@ -28,7 +28,9 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (state.searchedFilter !== "") {
+      fetchData();
+    }
   }, []);
 
   const onSubmitForm = (e: React.FormEvent) => {
