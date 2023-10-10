@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import useSingleMeal from "../hooks/useSingleMeal";
 import { GetMealApiResponse } from "../context/SingleReceipContext";
-import { Loading, SingleMeal } from "../components";
+import { Loading } from "../components";
 
 const SingleMealPage = () => {
   const { dispatch, state, SINGLE_MEAL_REDUCER_ACTIONS } = useSingleMeal();
@@ -43,7 +43,7 @@ const SingleMealPage = () => {
   if (!state.isLoading && state.receivedMeal) {
     return (
       <div className="w-[100%] md:px-8 px-4">
-        <SingleMeal meal={state.receivedMeal} />
+        <img src={state.receivedMeal[0].strMealThumb} />
       </div>
     );
   }
