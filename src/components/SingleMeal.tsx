@@ -46,6 +46,7 @@ const SingleMeal = ({ meal }: PropsType): ReactElement => {
 
   const goToAllMealsByIngredient = (strIngredient: string) => {
     navigate(`/ingredient/${strIngredient}`);
+    window.scrollTo({ top: 0 });
   };
 
   return (

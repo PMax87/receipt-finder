@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useHomePage from "../hooks/useHomePage";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { GetMealsApiResponse } from "../context/HomePageContext";
-import { Meals, SearchedMeals } from "../components";
+import { SearchedMeals } from "../components";
 const url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
 
 const MainIngredientSearchPage = () => {

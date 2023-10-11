@@ -6,4 +6,12 @@ import Loading from "./Loading";
 import SingleMeal from "./SingleMeal";
 import YoutubeEmbed from "./YouTubeEmbed";
 
-export { Navbar, Hero, SearchedMeals, Meals, Loading, SingleMeal, YoutubeEmbed };
+export {
+  Navbar,
+  Hero,
+  SearchedMeals,
+  Meals,
+  Loading,
+  SingleMeal,
+  YoutubeEmbed,
+};
