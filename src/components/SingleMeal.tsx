@@ -80,6 +80,31 @@ const SingleMeal = ({ meal }: PropsType): ReactElement => {
           </div>
         </div>
       </div>
+      <div className="mt-5">
+        <div className="p-10 w-2/3 mx-auto bg-slate-100 rounded">
+          <div className="mt-2">
+            <h3 className="text-3xl">Ingredienti:</h3>
+            <p className="text-xl">Per {meal.strMeal}</p>
+          </div>
+          <div className="grid grid-cols-2 place-content-center justify-center list-inside">
+            {instructionList.map((instruction, id) => {
+              if (instruction.ingredient !== "") {
+                return (
+                  <li key={id} className="flex list-disc">
+                    <p className="font-bold capitalize">
+                      {instruction.ingredient}
+                    </p>
+                    {instruction.qty}
+                  </li>
+                );
+              }
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="mt-5">
+        <p className="leading-relaxed">{meal.strInstructions}</p>
+      </div>
     </div>
   );
 };
