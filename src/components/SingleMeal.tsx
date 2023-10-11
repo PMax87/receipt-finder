@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { Meal } from "../context/SingleReceipContext";
+import { YoutubeEmbed } from ".";
 
 type PropsType = {
   meal: Meal;
@@ -41,9 +42,14 @@ class Mapper {
 
 const SingleMeal = ({ meal }: PropsType): ReactElement => {
   const instructionList = Mapper.map(meal);
+  const navigate = useNavigate();
+
+  const goToAllMealsByIngredient = (strIngredient: string) => {
+    navigate(`/ingredient/${strIngredient}`);
+  };
 
   return (
-    <div className="container mx-auto max-w-screen-xl mt-5">
+    <div className="container mx-auto max-w-screen-xl mt-5 mb-14">
       <div className="pt-3">
         <Link to="/" className="flex gap-3 items-center">
           <span>
@@ -52,57 +58,57 @@ const SingleMeal = ({ meal }: PropsType): ReactElement => {
           <span className="uppercase text-2xl font-medium">Torna in home</span>
         </Link>
       </div>
-      <div className="grid grid-cols-2 mt-14 gap-14">
-        <img src={meal.strMealThumb} alt={meal.strMeal} />
-        <div className="flex flex-col">
+      <div className="flex flex-wrap mt-14 justify-center">
+        <div className="w-full lg:w-2/3">
+          <YoutubeEmbed embedUrl={meal.strYoutube} />
+        </div>
+        <div className="lg:w-1/3 lg:mt-0 lg:pl-10 mt-5 flex flex-col pl-0 w-3/4 justify-center ">
           <h3 className="text-3xl capitalize">{meal.strMeal}</h3>
           <div className="flex mt-4 gap-5">
-            <div className="rounded p-3 w-32 bg-slate-200 ">
-              <h4 className="font-semibold">Category:</h4>
-              <p className="rounded bg-slate-200">{meal.strCategory}</p>
+            <div className="rounded py-4 w-full bg-slate-200 ">
+              <p className="text-2xl text-center">{meal.strCategory}</p>
             </div>
-            <div className="rounded p-3 w-32 bg-slate-200 ">
-              <h4 className="font-semibold">Area:</h4>
-              <p className="rounded bg-slate-200">{meal.strArea}</p>
+            <div className="rounded py-4 w-full bg-slate-200">
+              <p className="text-2xl text-center">{meal.strArea}</p>
             </div>
-          </div>
-          <div className="mt-5">
-            <h3 className="text-3xl">Ingredienti:</h3>
-            {instructionList.map((instruction, id) => {
-              if (instruction.ingredient !== "") {
-                return (
-                  <li key={id}>
-                    {instruction.ingredient} {instruction.qty}
-                  </li>
-                );
-              }
-            })}
           </div>
         </div>
       </div>
       <div className="mt-5">
-        <div className="p-10 w-2/3 mx-auto bg-slate-100 rounded">
+        <div className="p-10 w-full lg:w-2/3 mx-auto bg-slate-100 rounded">
           <div className="mt-2">
-            <h3 className="text-3xl">Ingredienti:</h3>
-            <p className="text-xl">Per {meal.strMeal}</p>
+            <h3 className="text-2xl font-medium">Ingredienti</h3>
+            <p className="text-xl mt-1">Per {meal.strMeal}</p>
           </div>
-          <div className="grid grid-cols-2 place-content-center justify-center list-inside">
-            {instructionList.map((instruction, id) => {
-              if (instruction.ingredient !== "") {
-                return (
-                  <li key={id} className="flex list-disc">
-                    <p className="font-bold capitalize">
-                      {instruction.ingredient}
-                    </p>
-                    {instruction.qty}
-                  </li>
-                );
-              }
-            })}
+          <div className="p-2">
+            <ul className="grid sm:grid-cols-2 grid-cols-1 gap-3 place-content-center justify-center list-disc mt-5">
+              {instructionList.map((instruction, id) => {
+                if (
+                  instruction.ingredient !== "" &&
+                  instruction.ingredient !== null &&
+                  instruction.qty !== "" &&
+                  instruction.qty !== null
+                ) {
+                  return (
+                    <li key={id} className="flex sm:text-base text-xl">
+                      <p
+                        className="font-bold capitalize me-2 cursor-pointer underline"
+                        onClick={() =>
+                          goToAllMealsByIngredient(instruction.ingredient)
+                        }
+                      >
+                        {instruction.ingredient + ":"}
+                      </p>
+                      <p>{instruction.qty}</p>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
           </div>
         </div>
       </div>
-      <div className="mt-5">
+      <div className="mt-5 sm:px-20 px-0">
         <p className="leading-relaxed">{meal.strInstructions}</p>
       </div>
     </div>
