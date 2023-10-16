@@ -98,7 +98,9 @@ const SingleMeal = ({ meal }: PropsType): ReactElement => {
                           goToAllMealsByIngredient(instruction.ingredient)
                         }
                       >
-                        {instruction.ingredient + ":"}
+                        {instruction.qty === " "
+                          ? instruction.ingredient
+                          : instruction.ingredient + ":"}
                       </p>
                       <p>{instruction.qty}</p>
                     </li>

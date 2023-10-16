@@ -82,8 +82,8 @@ const HomePage = () => {
         </div>
       </Hero>
       <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
-        <form onSubmit={onSubmitForm} className="flex items-center">
-          <label className="text-2xl font-semibold me-4">
+        <form onSubmit={onSubmitForm} className="flex items-center flex-wrap">
+          <label className="text-2xl font-semibold me-4 w-full lg:w-auto">
             Cerca la tua ricetta:
           </label>
           <input
@@ -91,7 +91,7 @@ const HomePage = () => {
             name="userSearch"
             value={state.searchedFilter}
             onChange={onChangeInput}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 w-60 me-4"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 lg:w-60 me-4 w-full"
           />
           <button type="submit" disabled={state.isLoading}>
             <AiOutlineSearch className="fill-fuchsia-500 text-2xl" />
