@@ -76,7 +76,7 @@ const SingleMeal = ({ meal }: PropsType): ReactElement => {
         </div>
       </div>
       <div className="mt-5">
-        <div className="p-10 w-full lg:w-2/3 mx-auto bg-slate-100 rounded">
+        <div className="p-5 lg:p-10 w-full lg:w-2/3 mx-auto bg-slate-100 rounded">
           <div className="mt-2">
             <h3 className="text-2xl font-medium">Ingredienti</h3>
             <p className="text-xl mt-1">Per {meal.strMeal}</p>

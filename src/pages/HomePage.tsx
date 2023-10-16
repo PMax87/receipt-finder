@@ -81,9 +81,9 @@ const HomePage = () => {
           </div>
         </div>
       </Hero>
-      <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
+      <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:p-10">
         <form onSubmit={onSubmitForm} className="flex items-center flex-wrap">
-          <label className="text-2xl font-semibold me-4 w-full lg:w-auto">
+          <label className="text-2xl font-semibold me-4 w-full mt-5 lg:mt-0 lg:w-auto">
             Cerca la tua ricetta:
           </label>
           <input
@@ -91,10 +91,10 @@ const HomePage = () => {
             name="userSearch"
             value={state.searchedFilter}
             onChange={onChangeInput}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 lg:w-60 me-4 w-full"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 lg:w-60 me-4 w-full my-3"
           />
           <button type="submit" disabled={state.isLoading}>
-            <AiOutlineSearch className="fill-fuchsia-500 text-2xl" />
+            <AiOutlineSearch className="fill-fuchsia-500 text-2xl me-3" />
           </button>
           <p
             className={
@@ -107,9 +107,7 @@ const HomePage = () => {
           </p>
         </form>
       </div>
-      <div className="w-[100%] md:p-8 p-4">
-        {state.isLoading ? <div>Loading...</div> : <SearchedMeals />}
-      </div>
+      <>{state.isLoading ? <div>Loading...</div> : <SearchedMeals />}</>
     </>
   );
 };

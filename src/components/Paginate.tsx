@@ -27,8 +27,8 @@ const Paginate = () => {
   };
 
   return (
-    <>
-      <div className="container max-w-screen-xl grid grid-cols-1 mx-auto py-10 mt-4 lg:grid-cols-3 gap-10">
+    <div className="w-[100%] md:p-4 p-4">
+      <div className="container max-w-screen-xl grid grid-cols-1 mx-auto py-2 mt-4 lg:grid-cols-3 gap-10">
         {currentPageData}
       </div>
       <div className="container max-w-screen-xl mx-auto flex justify-center mt-5 transition-all">
@@ -43,9 +43,9 @@ const Paginate = () => {
                 aria-hidden="true"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </>
@@ -60,9 +60,9 @@ const Paginate = () => {
                 aria-hidden="true"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </>
@@ -94,7 +94,7 @@ const Paginate = () => {
           disabledLinkClassName={"cursor-default"}
         />
       </div>
-    </>
+    </div>
   );
 };
 

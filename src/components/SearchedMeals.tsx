@@ -32,7 +32,11 @@ const SearchedMeals = () => {
     );
   }
 
-  return <Paginate />;
+  return (
+    <>
+      <Paginate />;
+    </>
+  );
 };
 
 export default SearchedMeals;

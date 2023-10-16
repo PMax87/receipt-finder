@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import useHomePage from "../hooks/useHomePage";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { SearchedMeals } from "../components";
 const url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
 
 const MainIngredientSearchPage = () => {
-  const { dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
+  const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
   const { strIngredient } = useParams();
 
   const fetchSearchedMealFromIngredient = async () => {
@@ -17,7 +17,6 @@ const MainIngredientSearchPage = () => {
         url + strIngredient
       );
       const data = response.data.meals;
-      console.log(data);
       dispatch({
         type: HOMEPAGE_REDUCER_ACTIONS.MEALS_FETCHING_SUCCCESS,
         payload: { meals: data },
@@ -27,12 +26,36 @@ const MainIngredientSearchPage = () => {
     }
   };
 
+  const onFilterResults = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    dispatch({
+      type: HOMEPAGE_REDUCER_ACTIONS.FILTER_RESULT_BY_USER,
+      payload: { mealFilterResult: value },
+    });
+  };
+
   useEffect(() => {
     fetchSearchedMealFromIngredient();
   }, []);
 
   return (
     <>
+      <div className="container mx-auto max-w-screen-xl pt-5">
+        <h3 className="text-xl">
+          La ricerca per l'ingrediente{" "}
+          <span className="font-semibold">{strIngredient}</span> ha prodotto{" "}
+          {state.receivedMeals.length} risultati
+        </h3>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            className=""
+            type="text"
+            placeholder="Filter the result"
+            value={state.mealFilterResult}
+            onChange={onFilterResults}
+          />
+        </form>
+      </div>
       <SearchedMeals />
     </>
   );

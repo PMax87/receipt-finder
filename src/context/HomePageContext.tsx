@@ -1,8 +1,9 @@
-import { ReactElement, createContext, useReducer, useMemo } from "react";
+import { ReactElement, createContext, useReducer, useMemo, useEffect } from "react";
 
 export type ApiResponse = {
   meals?: Meal[];
   searchedFilter?: string;
+  mealFilterResult?: string;
 };
 
 export type GetMealsApiResponse = {
@@ -21,6 +22,7 @@ export type HomePageStateType = {
   isError: boolean;
   receivedMeals: Meal[];
   searchedFilter: string;
+  mealFilterResult: string;
 };
 
 const initialHomePageState: HomePageStateType = {
@@ -29,6 +31,7 @@ const initialHomePageState: HomePageStateType = {
   isError: false,
   receivedMeals: [],
   searchedFilter: "tomato",
+  mealFilterResult: "",
 };
 
 const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
@@ -38,6 +41,7 @@ const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
   IS_LOADING_SEARCHED_MEALS: "IS_LOADING_SEARCHED_MEALS",
   MEALS_FETCHING_SUCCCESS: "MEALS_FETCHING_SUCCCESS",
   IS_ERROR_SEARCHED_MEALS: "IS_ERROR_SEARCHED_MEALS",
+  FILTER_RESULT_BY_USER: "FILTER_RESULT_BY_USER",
 };
 
 export type HomePageReducerAction = {
@@ -78,6 +82,24 @@ const reducer = (
     case HOMEPAGE_REDUCER_ACTIONS_TYPE.IS_ERROR_SEARCHED_MEALS: {
       return { ...state, isLoading: false, isError: true };
     }
+    case HOMEPAGE_REDUCER_ACTIONS_TYPE.FILTER_RESULT_BY_USER: {
+      if (!action.payload) {
+        throw new Error("Error in input form");
+      }
+      const { receivedMeals } = state;
+      const { mealFilterResult } = action.payload;
+      const newMealFilter = mealFilterResult == null ? "" : mealFilterResult;
+      const tempReceivedMeals = [...receivedMeals];
+      const filteredMeals = tempReceivedMeals.filter((meal) => {
+        return meal.strMeal.toLowerCase().includes(newMealFilter)
+      });
+      console.log(receivedMeals);
+      return {
+        ...state,
+        mealFilterResult: newMealFilter,
+        receivedMeals: filteredMeals,
+      };
+    }
     default:
       throw new Error("Unidentified reducer action type");
   }
@@ -108,6 +130,7 @@ const initialHomePageContextState: UseHomePageContextType = {
     isLoading: false,
     isError: false,
     receivedMeals: [],
+    mealFilterResult: "",
   },
 };
 
