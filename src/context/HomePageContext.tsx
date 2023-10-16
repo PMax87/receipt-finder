@@ -93,7 +93,7 @@ const reducer = (
       const filteredMeals = tempReceivedMeals.filter((meal) => {
         return meal.strMeal.toLowerCase().includes(newMealFilter)
       });
-      console.log(receivedMeals);
+      console.log(filteredMeals)
       return {
         ...state,
         mealFilterResult: newMealFilter,
