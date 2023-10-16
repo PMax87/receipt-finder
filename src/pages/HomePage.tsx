@@ -107,7 +107,7 @@ const HomePage = () => {
           </p>
         </form>
       </div>
-      <div className="w-[100%] md:px-8 px-4">
+      <div className="w-[100%] md:p-8 p-4">
         {state.isLoading ? <div>Loading...</div> : <SearchedMeals />}
       </div>
     </>

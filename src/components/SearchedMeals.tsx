@@ -1,23 +1,8 @@
-import { useState } from "react";
-import { Meals } from ".";
+import { Paginate } from ".";
 import useHomePage from "../hooks/useHomePage";
-import ReactPaginate from "react-paginate";
 
 const SearchedMeals = () => {
   const { state } = useHomePage();
-  const [currentPage, setCurrentPage] = useState<number>(0);
-
-  function handlePageClick({ selected: selectedPage }) {
-    setCurrentPage(selectedPage);
-  }
-
-  const offset = currentPage * PER_PAGE;
-
-  const currentPageData = state.receivedMeals
-    .slice(offset, offset + PER_PAGE)
-    .map(({ thumburl }) => <img src={thumburl} />);
-
-  const pageCount = Math.ceil(data.length / PER_PAGE);
 
   if (state.receivedMeals.length < 1) {
     return (
@@ -47,13 +32,7 @@ const SearchedMeals = () => {
     );
   }
 
-  return (
-    <div className="container max-w-screen-xl grid grid-cols-1 mx-auto py-10 mt-4 lg:grid-cols-3 gap-10">
-      {state.receivedMeals.map((meal) => {
-        return <Meals key={meal.idMeal} meal={meal} />;
-      })}
-    </div>
-  );
+  return <Paginate />;
 };
 
 export default SearchedMeals;

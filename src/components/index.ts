@@ -5,6 +5,7 @@ import Meals from "./Meals";
 import Loading from "./Loading";
 import SingleMeal from "./SingleMeal";
 import YoutubeEmbed from "./YouTubeEmbed";
+import Paginate from "./Paginate";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   Loading,
   SingleMeal,
   YoutubeEmbed,
+  Paginate,
 };

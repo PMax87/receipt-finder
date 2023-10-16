@@ -7,7 +7,7 @@ import { SearchedMeals } from "../components";
 const url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=";
 
 const MainIngredientSearchPage = () => {
-  const { state, dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
+  const { dispatch, HOMEPAGE_REDUCER_ACTIONS } = useHomePage();
   const { strIngredient } = useParams();
 
   const fetchSearchedMealFromIngredient = async () => {
@@ -32,9 +32,9 @@ const MainIngredientSearchPage = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <SearchedMeals />
-    </div>
+    </>
   );
 };
 
