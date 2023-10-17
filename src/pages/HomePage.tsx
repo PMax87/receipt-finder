@@ -17,6 +17,7 @@ const HomePage = () => {
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${state.searchedFilter}`
       );
       const data = response.data?.meals;
+      console.log(data);
       dispatch({
         type: HOMEPAGE_REDUCER_ACTIONS.MEALS_FETCHING_SUCCCESS,
         payload: { meals: data },

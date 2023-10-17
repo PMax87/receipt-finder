@@ -11,11 +11,11 @@ const Paginate = () => {
 
   const offset = currentPage * MEALS_PER_PAGE;
 
-  const currentPageData = state.receivedMeals
+  const currentPageData = state.filteredMeals
     .slice(offset, offset + MEALS_PER_PAGE)
     .map((meal) => <Meals key={meal.idMeal} meal={meal} />);
 
-  const pageCount = Math.ceil(state.receivedMeals.length / MEALS_PER_PAGE);
+  const pageCount = Math.ceil(state.filteredMeals.length / MEALS_PER_PAGE);
 
   const handlePageClick = ({
     selected: selectedPage,

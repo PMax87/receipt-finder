@@ -1,9 +1,10 @@
-import { ReactElement, createContext, useReducer, useMemo, useEffect } from "react";
+import { ReactElement, createContext, useReducer, useMemo } from "react";
 
 export type ApiResponse = {
   meals?: Meal[];
   searchedFilter?: string;
   mealFilterResult?: string;
+  filteredMeals?: Meal[];
 };
 
 export type GetMealsApiResponse = {
@@ -21,6 +22,7 @@ export type HomePageStateType = {
   isLoading: boolean;
   isError: boolean;
   receivedMeals: Meal[];
+  filteredMeals: Meal[];
   searchedFilter: string;
   mealFilterResult: string;
 };
@@ -30,6 +32,7 @@ const initialHomePageState: HomePageStateType = {
   isLoading: true,
   isError: false,
   receivedMeals: [],
+  filteredMeals: [],
   searchedFilter: "tomato",
   mealFilterResult: "",
 };
@@ -77,7 +80,12 @@ const reducer = (
       }
       const { meals } = action.payload;
       const newMeals = meals == undefined ? [] : meals;
-      return { ...state, isLoading: false, receivedMeals: newMeals };
+      return {
+        ...state,
+        isLoading: false,
+        receivedMeals: newMeals,
+        filteredMeals: newMeals,
+      };
     }
     case HOMEPAGE_REDUCER_ACTIONS_TYPE.IS_ERROR_SEARCHED_MEALS: {
       return { ...state, isLoading: false, isError: true };
@@ -90,14 +98,13 @@ const reducer = (
       const { mealFilterResult } = action.payload;
       const newMealFilter = mealFilterResult == null ? "" : mealFilterResult;
       const tempReceivedMeals = [...receivedMeals];
-      const filteredMeals = tempReceivedMeals.filter((meal) => {
-        return meal.strMeal.toLowerCase().includes(newMealFilter)
+      const newFilteredMeals = tempReceivedMeals.filter((meal) => {
+        return meal.strMeal.toLowerCase().includes(newMealFilter);
       });
-      console.log(filteredMeals)
       return {
         ...state,
         mealFilterResult: newMealFilter,
-        receivedMeals: filteredMeals,
+        filteredMeals: newFilteredMeals,
       };
     }
     default:
@@ -130,6 +137,7 @@ const initialHomePageContextState: UseHomePageContextType = {
     isLoading: false,
     isError: false,
     receivedMeals: [],
+    filteredMeals: [],
     mealFilterResult: "",
   },
 };
