@@ -33,6 +33,7 @@ const SingleMealPage = () => {
 
   useEffect(() => {
     fetchSingleMeal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (state.isLoading) {
