@@ -30,7 +30,7 @@ const MainIngredientSearchPage = () => {
     const { value } = e.target;
     dispatch({
       type: HOMEPAGE_REDUCER_ACTIONS.FILTER_RESULT_BY_USER,
-      payload: { mealFilterResult: value },
+      payload: { mealsFilterInput: value },
     });
   };
 
@@ -38,25 +38,30 @@ const MainIngredientSearchPage = () => {
     fetchSearchedMealFromIngredient();
     dispatch({
       type: HOMEPAGE_REDUCER_ACTIONS.FILTER_RESULT_BY_USER,
-      payload: { mealFilterResult: "" },
+      payload: { mealsFilterInput: "" },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <div className="container mx-auto max-w-screen-xl pt-5">
+      <div className="container mx-auto max-w-screen-xl pt-5 px-4 lg:px-0">
         <h3 className="text-xl">
           La ricerca per l'ingrediente{" "}
-          <span className="font-semibold">{strIngredient}</span> ha prodotto{" "}
-          {state.receivedMeals.length} risultati
+          <span className="font-semibold capitalize">{strIngredient}</span> ha
+          prodotto {state.filteredMeals.length} risultati
         </h3>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="flex-wrap items-center mt-4 lg:flex"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <label className="me-2 text-2xl w-full lg:w-auto">
+            Filtra i risultati
+          </label>
           <input
-            className=""
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-300 outline-fuchsia-600 focus:border-fuchsia-500 block p-2.5 lg:w-60 me-4 w-full my-3"
             type="text"
-            placeholder="Filter the result"
-            value={state.mealFilterResult}
+            value={state.mealsFilterInput}
             onChange={onFilterResults}
           />
         </form>

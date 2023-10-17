@@ -11,11 +11,11 @@ const Paginate = () => {
 
   const offset = currentPage * MEALS_PER_PAGE;
 
+  const pageCount = Math.ceil(state.filteredMeals.length / MEALS_PER_PAGE);
+
   const currentPageData = state.filteredMeals
     .slice(offset, offset + MEALS_PER_PAGE)
     .map((meal) => <Meals key={meal.idMeal} meal={meal} />);
-
-  const pageCount = Math.ceil(state.filteredMeals.length / MEALS_PER_PAGE);
 
   const handlePageClick = ({
     selected: selectedPage,
@@ -28,7 +28,20 @@ const Paginate = () => {
 
   useEffect(() => {
     setCurrentPage(0);
-  }, [state.mealFilterResult]);
+  }, [state.mealsFilterInput]);
+
+  if (state.filteredMeals.length < 1) {
+    return (
+      <div className="container lg:px-0 mx-auto max-w-screen-xl px-4 lg:mt-4">
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-full"
+          role="alert"
+        >
+          <span className="block sm:inline">Nessun ricetta trovata</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-[100%] md:p-4 p-4">
@@ -54,6 +67,7 @@ const Paginate = () => {
               </svg>
             </>
           }
+          forcePage={currentPage}
           nextLabel={
             <>
               <span className="sr-only">Next</span>

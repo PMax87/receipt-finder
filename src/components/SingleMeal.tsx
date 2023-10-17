@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { Meal } from "../context/SingleReceipContext";
 import { YoutubeEmbed } from ".";
@@ -52,12 +52,18 @@ const SingleMeal = ({ meal }: PropsType): ReactElement => {
   return (
     <div className="container mx-auto max-w-screen-xl mt-5 mb-14">
       <div className="pt-3">
-        <Link to="/" className="flex gap-3 items-center">
+        <button
+          type="button"
+          className="flex gap-3 items-center"
+          onClick={() => navigate(-1)}
+        >
           <span>
             <BsArrowLeftSquareFill className="fill-fuchsia-500 text-3xl" />
           </span>
-          <span className="uppercase text-2xl font-medium">Torna in home</span>
-        </Link>
+          <span className="uppercase text-2xl font-medium">
+            Torna ai risultati
+          </span>
+        </button>
       </div>
       <div className="flex flex-wrap mt-14 justify-center">
         <div className="w-full lg:w-2/3">

@@ -34,7 +34,7 @@ const SearchedMeals = () => {
 
   return (
     <>
-      <Paginate />;
+      <Paginate />
     </>
   );
 };

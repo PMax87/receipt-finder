@@ -2,9 +2,9 @@ import { ReactElement, createContext, useReducer, useMemo } from "react";
 
 export type ApiResponse = {
   meals?: Meal[];
-  searchedFilter?: string;
-  mealFilterResult?: string;
   filteredMeals?: Meal[];
+  searchedFilter?: string;
+  mealsFilterInput?: string;
 };
 
 export type GetMealsApiResponse = {
@@ -24,7 +24,7 @@ export type HomePageStateType = {
   receivedMeals: Meal[];
   filteredMeals: Meal[];
   searchedFilter: string;
-  mealFilterResult: string;
+  mealsFilterInput: string;
 };
 
 const initialHomePageState: HomePageStateType = {
@@ -34,7 +34,7 @@ const initialHomePageState: HomePageStateType = {
   receivedMeals: [],
   filteredMeals: [],
   searchedFilter: "tomato",
-  mealFilterResult: "",
+  mealsFilterInput: "",
 };
 
 const HOMEPAGE_REDUCER_ACTIONS_TYPE = {
@@ -95,15 +95,15 @@ const reducer = (
         throw new Error("Error in input form");
       }
       const { receivedMeals } = state;
-      const { mealFilterResult } = action.payload;
-      const newMealFilter = mealFilterResult == null ? "" : mealFilterResult;
+      const { mealsFilterInput } = action.payload;
+      const newMealFilter = mealsFilterInput == null ? "" : mealsFilterInput;
       const tempReceivedMeals = [...receivedMeals];
       const newFilteredMeals = tempReceivedMeals.filter((meal) => {
         return meal.strMeal.toLowerCase().includes(newMealFilter);
       });
       return {
         ...state,
-        mealFilterResult: newMealFilter,
+        mealsFilterInput: newMealFilter,
         filteredMeals: newFilteredMeals,
       };
     }
@@ -138,7 +138,7 @@ const initialHomePageContextState: UseHomePageContextType = {
     isError: false,
     receivedMeals: [],
     filteredMeals: [],
-    mealFilterResult: "",
+    mealsFilterInput: "",
   },
 };
 

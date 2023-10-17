@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 const url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useSingleMeal from "../hooks/useSingleMeal";
 import { GetMealApiResponse } from "../context/SingleReceipContext";
 import { Loading } from "../components";
