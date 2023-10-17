@@ -6,6 +6,8 @@ import Loading from "./Loading";
 import SingleMeal from "./SingleMeal";
 import YoutubeEmbed from "./YouTubeEmbed";
 import Paginate from "./Paginate";
+import CategoriesColumn from "./CategoriesColumn";
+import MealsByCategory from "./MealsByCategory";
 
 export {
   Navbar,
@@ -16,4 +18,6 @@ export {
   SingleMeal,
   YoutubeEmbed,
   Paginate,
+  CategoriesColumn,
+  MealsByCategory
 };

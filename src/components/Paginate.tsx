@@ -2,9 +2,12 @@ import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
 import useHomePage from "../hooks/useHomePage";
 import { Meals } from ".";
+import useCategory from "../hooks/useCategory";
 
 const Paginate = () => {
   const { state } = useHomePage();
+  const {state: categoryState} = useCategory()
+  
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const MEALS_PER_PAGE = 6;
@@ -28,7 +31,7 @@ const Paginate = () => {
 
   useEffect(() => {
     setCurrentPage(0);
-  }, [state.mealsFilterInput]);
+  }, [state.mealsFilterInput, categoryState.selectedCategory]);
 
   if (state.filteredMeals.length < 1) {
     return (
