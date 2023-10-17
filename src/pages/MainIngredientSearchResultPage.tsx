@@ -36,6 +36,11 @@ const MainIngredientSearchPage = () => {
 
   useEffect(() => {
     fetchSearchedMealFromIngredient();
+    dispatch({
+      type: HOMEPAGE_REDUCER_ACTIONS.FILTER_RESULT_BY_USER,
+      payload: { mealFilterResult: "" },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

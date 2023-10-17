@@ -1,5 +1,5 @@
 import ReactPaginate from "react-paginate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useHomePage from "../hooks/useHomePage";
 import { Meals } from ".";
 
@@ -25,6 +25,10 @@ const Paginate = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setCurrentPage(selectedPage);
   };
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [state.mealFilterResult]);
 
   return (
     <div className="w-[100%] md:p-4 p-4">
