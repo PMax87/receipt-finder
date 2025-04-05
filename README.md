@@ -1,27 +1,37 @@
-# React + TypeScript + Vite
+# Receipt Finder 🍽️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Un'app semplice e intuitiva per trovare ricette basate su un ingrediente!**  
+Sviluppata con React e TypeScript.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologie utilizzate
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Fetch API
+- CSS Modules
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## ✨ Funzionalità principali
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- 🔎 Ricerca ricette in base a un singolo ingrediente
+- 📋 Visualizzazione dei risultati con titolo e immagine
+- 🖥️ Layout **responsive** per mobile, tablet e desktop
+- ⚡ Interfaccia leggera e veloce
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+---
+
+## 📷 Screenshot
+
+*(Puoi aggiungere qui immagini della schermata principale o della ricerca se vuoi)*
+
+---
+
+## 🔧 Installazione e avvio progetto
+
+Clona il repository:
+
+```bash
+git clone https://github.com/PMax87/receipt-finder.git
