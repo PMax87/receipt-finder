@@ -23,15 +23,6 @@ Sviluppata con React e TypeScript.
 
 ---
 
-## 🔧 Installazione e avvio progetto
-
-Clona il repository:
-
-```bash
-git clone https://github.com/PMax87/receipt-finder.git
-```
----
-
 ## 📚 Note
 🚧 La sezione "Contatti" è attualmente in fase di sviluppo.
 L'app si concentra attualmente sulla ricerca delle ricette tramite API esterne, con gestione degli stati via React Hooks.
