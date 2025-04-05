@@ -23,12 +23,6 @@ Sviluppata con React e TypeScript.
 
 ---
 
-## 📷 Screenshot
-
-*(Puoi aggiungere qui immagini della schermata principale o della ricerca se vuoi)*
-
----
-
 ## 🔧 Installazione e avvio progetto
 
 Clona il repository:
